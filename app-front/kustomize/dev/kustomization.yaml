@@ -1,6 +1,6 @@
 resources:
   - https://github.com/inv-midhunmathew/kustomize-base?ref=main
 
-patchesStrategicMerge:
-  - patches/configmap.yaml
-  - patches/deployment.yaml
+patches:
+  - path: patches/configmap.yaml
+  - path: patches/deployment.yaml
