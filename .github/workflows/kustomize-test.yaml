@@ -25,7 +25,7 @@ jobs:
     #       version: '1.28.0'
 
       - name: 🔍 Kustomize build (dev overlay)
-        working-directory: ./kustomize/dev
+        working-directory: ./app-front/kustomize/dev
         run: |
           kustomize build . > output.yaml
           cat output.yaml
