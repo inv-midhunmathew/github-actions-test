@@ -1,5 +1,5 @@
 resources:
-  - https://github.com/inv-midhunmathew/kustomize-base?ref=main
+  - https://github.com/inv-midhunmathew/kustomize-base/app/base?ref=main
 
 patches:
   - path: patches/configmap.yaml
