@@ -1,0 +1,43 @@
+name: Kustomize Build & Apply
+
+on:
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  kustomize-build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🧾 Checkout code
+        uses: actions/checkout@v3
+
+      - name: 🛠️ Set up Kustomize
+        uses: imranismail/setup-kustomize@v2
+        with:
+          kustomize-version: '5.0.1'  # Use your preferred version
+
+    #   - name: 📦 Set up kubectl (optional: only if applying)
+    #     uses: azure/setup-kubectl@v3
+    #     with:
+    #       version: '1.28.0'
+
+      - name: 🔍 Kustomize build (dev overlay)
+        working-directory: ./kustomize/dev
+        run: |
+          kustomize build . > output.yaml
+          cat output.yaml
+
+    #   - name: ✅ Validate manifest (optional)
+    #     run: |
+    #       kubeval output.yaml || echo "Kubeval not critical"
+
+    #   # Optional: Apply to cluster (if using GitHub OIDC or KUBECONFIG)
+    #   - name: 🚀 Apply to cluster
+    #     if: github.ref == 'refs/heads/develop'
+    #     env:
+    #       KUBECONFIG: ${{ secrets.KUBECONFIG }}
+    #     run: |
+    #       kubectl apply -f output.yaml
